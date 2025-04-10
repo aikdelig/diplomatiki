@@ -99,6 +99,7 @@ button:hover {
 
 
 footer {
+    position: fixed;
     text-align: center;
     padding: 10px;
     background: #222;

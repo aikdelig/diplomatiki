@@ -36,25 +36,40 @@ def dashboard(request):
             'bookstore_books': bookstore_books
         })
 
+
     elif user.role == 'bookstore':
+
         try:
+
             bookstore = Bookstore.objects.get(user=user)
+
         except Bookstore.DoesNotExist:
+
             bookstore = None
+
             books = []
 
         if bookstore:
+
             bookstore_stocks = BookstoreStock.objects.filter(bookstore=bookstore)
+
             books = [stock.book for stock in bookstore_stocks]
 
             if request.method == "POST":
+
                 book_id = request.POST.get("book_id")
-                book = get_object_or_404(Book, id=book_id)
-                form = BookUpdateForm(request.POST, instance=book)
+                bookstore_stock = get_object_or_404(BookstoreStock, book_id=book_id, bookstore=bookstore)
+                form = BookUpdateForm(request.POST, instance=bookstore_stock)
 
                 if form.is_valid():
+
                     form.save()
+
                     return redirect('dashboard')
+
+                else:
+
+                    print(form.errors)  # Εκτύπωση σφαλμάτων αν υπάρχουν
 
         return render(request, 'books/bookstore_dashboard.html', {
             'books': books,
