@@ -1,0 +1,48 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Πίνακας Ελέγχου Βιβλιοπωλείου{% endblock %}
+
+{% block content %}
+    <div class="dashboard-container">
+        <h2>📖 Καλώς ήρθες, {{ user.bookstore.name }}!</h2>
+
+        {% if books %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>📖 Τίτλος</th>
+                        <th>🏢 Εκδότης</th>
+                        <th>✍️ Συγγραφέας</th>
+                        <th>📦 Απόθεμα</th>
+                        <th>🛒 Πωλήσεις</th>
+                        <th>🔄 Ενημέρωση</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bookstore_stock in bookstore_stocks %}
+                    <tr>
+                        <td>{{ bookstore_stock.book.title }}</td>
+                        <td>{{ bookstore_stock.book.publisher.name }}</td>
+                        <td>{{ bookstore_stock.book.author.name }}</td>
+                        <td>{{ bookstore_stock.stock }}</td>
+                        <td>{{ bookstore_stock.sold }}</td>
+                        <td>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="book_id" value="{{ bookstore_stock.book.id }}">
+                                <input type="number" name="stock" value="{{ bookstore_stock.stock }}">
+                                <input type="number" name="sold" value="{{ bookstore_stock.sold }}">
+                        <td>
+                                <button type="submit">💾 Αποθήκευση</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>❌ Δεν υπάρχουν βιβλία προς διαχείριση.</p>
+        {% endif %}
+    </div>
+{% endblock %}
+

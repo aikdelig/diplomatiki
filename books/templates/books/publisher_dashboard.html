@@ -1,0 +1,42 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Πίνακας Ελέγχου Εκδότη{% endblock %}
+
+{% block content %}
+    <h2>Καλώς ήρθες, {{ user.publisher.name}}!</h2>
+
+
+ {% if bookstore_books %}
+    {% for book in publisher.book_set.all %}
+        <h2>📖 {{ book.title }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Βιβλίοπωλειο</th>
+                    <th>Συγγραφέας</th>
+                    <th>Πωλήσεις</th>
+                    <th>Απόθεμα</th>
+                </tr>
+            </thead>
+            <tbody>
+               {% for bookstore, books in bookstore_books.items %}
+                            {% for entry in books %}
+                                {% if entry.book.id == book.id %}
+                                    <tr>
+                                        <td>{{ bookstore.name }}</td>
+                                        <td>{{ book.author.name }}</td>
+                                        <td>{{ entry.stock }}</td>
+                                        <td>{{ entry.sold }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% else %}
+    <p>Δεν υπάρχουν βιβλία διαθέσιμα από τα βιβλιοπωλεία.</p>
+{% endif %}
+
+
+{% endblock %}

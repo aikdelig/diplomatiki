@@ -1,0 +1,55 @@
+ body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background: url('../../images/background.jpg') no-repeat center center/cover;
+             font-family: 'EB Garamond', serif;
+        }
+        .top-line {
+            width: 100%;
+            background-color: white;
+            text-align: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+        .top_line h2{
+            margin: 0;
+            font-size: 24px;
+            color: maroon;
+        }
+        .login-container {
+            width: 300px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: auto;
+            margin-right: 10%;
+        }
+        .login-container h2 {
+            text-align: center;
+            color: maroon;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background: maroon;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background: red;
+        }

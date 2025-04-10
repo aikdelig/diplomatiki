@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Σύνδεση</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/login/styles.css' %}">
+</head>
+<body>
+    <div class="top-line">
+        <h2>Διαχείριση Εκδόσεων</h2>
+    </div>
+    <div class="login-container">
+        <h2>Σύνδεση</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Όνομα Χρήστη</label>
+            <input type="text" name="username" required>
+            <label for="password">Κωδικός</label>
+            <input type="password" name="password" required>
+            <button type="submit">Σύνδεση</button>
+        </form>
+    </div>
+</body>
+</html>
